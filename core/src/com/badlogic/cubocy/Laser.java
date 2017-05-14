@@ -77,41 +77,10 @@ public class Laser {
 		startPoint.set(pos).add(0.5f, 0.5f);
 		cappedEndPoint.set(endPoint).add(0.5f, 0.5f);
 
-		Rectangle cbounds = map.cube.bounds;
 		Rectangle bbounds = map.bob.bounds;
 
 		boolean kill = false;
 
-		if (angle == -90) {
-			if (startPoint.x < cbounds.x && endPoint.x > cbounds.x) {
-				if (cbounds.y < startPoint.y && cbounds.y + cbounds.height > startPoint.y) {
-					cappedEndPoint.x = cbounds.x;
-				}
-			}
-		}
-		if (angle == 90) {
-			if (startPoint.x > cbounds.x && endPoint.x < cbounds.x) {
-				if (cbounds.y < startPoint.y && cbounds.y + cbounds.height > startPoint.y) {
-					cappedEndPoint.x = cbounds.x + cbounds.width;
-				}
-			}
-		}
-
-		if (angle == 0) {
-			if (startPoint.y < cbounds.y && endPoint.y > cbounds.y) {
-				if (cbounds.x < startPoint.x && cbounds.x + cbounds.width > startPoint.x) {
-					cappedEndPoint.y = cbounds.y;
-				}
-			}
-		}
-
-		if (angle == 180) {
-			if (startPoint.y > cbounds.y && endPoint.y < cbounds.y) {
-				if (cbounds.x < startPoint.x && cbounds.x + cbounds.width > startPoint.x) {
-					cappedEndPoint.y = cbounds.y + cbounds.height;
-				}
-			}
-		}
 
 		if (angle == -90) {
 			if (startPoint.x < bbounds.x) {

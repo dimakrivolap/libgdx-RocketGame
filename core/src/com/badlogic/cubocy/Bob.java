@@ -73,7 +73,7 @@ public class Bob {
 	}
 
 	private void processKeys () {
-		if (map.cube.state == Cube.CONTROLLED || state == SPAWN || state == DYING) return;
+		if (state == SPAWN || state == DYING) return;
 
 		float x0 = (Gdx.input.getX(0) / (float)Gdx.graphics.getWidth()) * 480;
 		float x1 = (Gdx.input.getX(1) / (float)Gdx.graphics.getWidth()) * 480;
@@ -104,7 +104,7 @@ public class Bob {
 		}
 	}
 
-	Rectangle[] r = {new Rectangle(), new Rectangle(), new Rectangle(), new Rectangle(), new Rectangle()};
+	Rectangle[] r = {new Rectangle(), new Rectangle(), new Rectangle(), new Rectangle()};
 
 	private void tryMove () {
 		bounds.x += vel.x;
@@ -177,12 +177,5 @@ public class Bob {
 		else
 			r[3].set(-1, -1, 0, 0);
 
-		if (map.cube.state == Cube.FIXED) {
-			r[4].x = map.cube.bounds.x;
-			r[4].y = map.cube.bounds.y;
-			r[4].width = map.cube.bounds.width;
-			r[4].height = map.cube.bounds.height;
-		} else
-			r[4].set(-1, -1, 0, 0);
 	}
 }

@@ -115,10 +115,9 @@ public class MapRenderer {
 	Vector3 lerpTarget = new Vector3();
 
 	public void render (float deltaTime) {
-		if (map.cube.state != Cube.CONTROLLED)
-			cam.position.lerp(lerpTarget.set(map.bob.pos.x, map.bob.pos.y, 0), 2f * deltaTime);
-		else
-			cam.position.lerp(lerpTarget.set(map.cube.pos.x, map.cube.pos.y, 0), 2f * deltaTime);
+
+		cam.position.lerp(lerpTarget.set(map.bob.pos.x, map.bob.pos.y, 0), 2f * deltaTime);
+
 		cam.update();
 
 		renderLaserBeams();
@@ -142,7 +141,6 @@ public class MapRenderer {
 		renderLasers();
 		renderMovingSpikes();
 		renderBob();
-		renderCube();
 		renderRockets();
 		batch.end();
 		renderLaserBeams();
@@ -182,12 +180,6 @@ public class MapRenderer {
 		batch.draw(anim.getKeyFrame(map.bob.stateTime, loop), map.bob.pos.x, map.bob.pos.y, 1, 1);
 	}
 
-	private void renderCube () {
-		if (map.cube.state == Cube.FOLLOW) batch.draw(cube, map.cube.pos.x, map.cube.pos.y, 1.5f, 1.5f);
-		if (map.cube.state == Cube.FIXED)
-			batch.draw(cubeFixed.getKeyFrame(map.cube.stateTime, false), map.cube.pos.x, map.cube.pos.y, 1.5f, 1.5f);
-		if (map.cube.state == Cube.CONTROLLED) batch.draw(cubeControlled, map.cube.pos.x, map.cube.pos.y, 1.5f, 1.5f);
-	}
 
 	private void renderRockets () {
 		for (int i = 0; i < map.rockets.size; i++) {

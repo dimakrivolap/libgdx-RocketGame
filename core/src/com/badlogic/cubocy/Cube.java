@@ -20,7 +20,6 @@ public class Cube {
 	Vector2 accel = new Vector2();
 	Vector2 vel = new Vector2();
 	Rectangle bounds = new Rectangle();
-	int state = FOLLOW;
 	float stateTime = 0;
 	Rectangle controllButtonRect = new Rectangle(480 - 64, 320 - 64, 64, 64);
 	Rectangle followButtonRect = new Rectangle(480 - 64, 320 - 138, 64, 64);
@@ -40,37 +39,6 @@ public class Cube {
 	public void update (float deltaTime) {
 		processKeys();
 
-		if (state == FOLLOW) {
-			target.set(map.bob.pos);
-			if (map.bob.dir == Bob.RIGHT) target.x--;
-			if (map.bob.dir == Bob.LEFT) target.x++;
-			target.y += 0.2f;
-
-			vel.set(target).sub(pos).scl(Math.min(4, pos.dst(target)) * deltaTime);
-			if (vel.len() > MAX_VELOCITY) vel.nor().scl(MAX_VELOCITY);
-			tryMove();
-		}
-
-		if (state == CONTROLLED) {
-			accel.scl(deltaTime);
-			vel.add(accel.x, accel.y);
-			if (accel.x == 0) vel.x *= DAMP;
-			if (accel.y == 0) vel.y *= DAMP;
-			if (vel.x > MAX_VELOCITY) vel.x = MAX_VELOCITY;
-			if (vel.x < -MAX_VELOCITY) vel.x = -MAX_VELOCITY;
-			if (vel.y > MAX_VELOCITY) vel.y = MAX_VELOCITY;
-			if (vel.y < -MAX_VELOCITY) vel.y = -MAX_VELOCITY;
-			vel.scl(deltaTime);
-			tryMove();
-			vel.scl(1.0f / deltaTime);
-		}
-
-		if (state == FIXED) {
-			if (stateTime > 5.0f) {
-				stateTime = 0;
-				state = FOLLOW;
-			}
-		}
 
 		stateTime += deltaTime;
 	}
@@ -85,27 +53,25 @@ public class Cube {
 		boolean followButton = (Gdx.input.isTouched(0) && followButtonRect.contains(x0, y0))
 			|| (Gdx.input.isTouched(1) && followButtonRect.contains(x1, y1));
 
-		if ((Gdx.input.isKeyPressed(Keys.SPACE) || controlButton) && state == FOLLOW && stateTime > 0.5f) {
+		if ((Gdx.input.isKeyPressed(Keys.SPACE) || controlButton) && stateTime > 0.5f) {
 			stateTime = 0;
-			state = CONTROLLED;
+
 			return;
 		}
 
-		if ((Gdx.input.isKeyPressed(Keys.SPACE) || controlButton) && state == CONTROLLED && stateTime > 0.5f) {
+		if ((Gdx.input.isKeyPressed(Keys.SPACE) || controlButton)  && stateTime > 0.5f) {
 			stateTime = 0;
-			state = FIXED;
 			return;
 		}
 
-		if ((Gdx.input.isKeyPressed(Keys.SPACE) || controlButton) && state == FIXED && stateTime > 0.5f) {
+		if ((Gdx.input.isKeyPressed(Keys.SPACE) || controlButton) && stateTime > 0.5f) {
 			stateTime = 0;
-			state = CONTROLLED;
+
 			return;
 		}
 
 		if ((Gdx.input.isKeyPressed(Keys.F) || followButton) && stateTime > 0.5f) {
 			stateTime = 0;
-			state = FOLLOW;
 			return;
 		}
 
@@ -115,43 +81,6 @@ public class Cube {
 		boolean down = (touch0 && (y0 < 60)) || (touch1 && (y1 < 60));
 		boolean up = (touch0 && (y0 > 80 && x0 < 128)) || (touch1 && (y1 > 80 && y1 < 128));
 
-		if (state == CONTROLLED) {
-			if (Gdx.input.isKeyPressed(Keys.A)) {
-				accel.x = -ACCELERATION;
-			} else if (Gdx.input.isKeyPressed(Keys.D) || right) {
-				accel.x = ACCELERATION;
-			} else {
-				accel.x = 0;
-			}
-
-			if (Gdx.input.isKeyPressed(Keys.W) || up) {
-				accel.y = ACCELERATION;
-			} else if (Gdx.input.isKeyPressed(Keys.S) || down) {
-				accel.y = -ACCELERATION;
-			} else {
-				accel.y = 0;
-			}
-
-			if (touch0) {
-				if (dpadRect.contains(x0, y0)) {
-					float x = (x0 - 64) / 64;
-					float y = (y0 - 64) / 64;
-					float len = (float)Math.sqrt(x * x + y * y);
-					if (len != 0) {
-						x /= len;
-						y /= len;
-					} else {
-						x = 0;
-						y = 0;
-					}
-					vel.x = x * MAX_VELOCITY;
-					vel.y = y * MAX_VELOCITY;
-				} else {
-					accel.x = 0;
-					accel.y = 0;
-				}
-			}
-		}
 	}
 
 	Rectangle[] r = {new Rectangle(), new Rectangle(), new Rectangle(), new Rectangle()};
@@ -221,10 +150,4 @@ public class Cube {
 			r[3].set(-1, -1, 0, 0);
 	}
 
-	public void setControlled () {
-		if (state == FOLLOW) {
-			state = CONTROLLED;
-			stateTime = 0;
-		}
-	}
 }

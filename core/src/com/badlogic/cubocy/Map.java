@@ -18,7 +18,6 @@ public class Map {
 
 	int[][] tiles;
 	public Bob bob;
-	Cube cube;
 	Array<Dispenser> dispensers = new Array<Dispenser>();
 	Dispenser activeDispenser = null;
 	Array<Rocket> rockets = new Array<Rocket>();
@@ -42,8 +41,6 @@ public class Map {
 					activeDispenser = dispenser;
 					bob = new Bob(this, activeDispenser.bounds.x, activeDispenser.bounds.y);
 					bob.state = Bob.SPAWN;
-					cube = new Cube(this, activeDispenser.bounds.x, activeDispenser.bounds.y);
-					cube.state = Cube.DEAD;
 				} else if (match(pix, DISPENSER)) {
 					Dispenser dispenser = new Dispenser(x, pixmap.getHeight() - 1 - y);
 					dispensers.add(dispenser);
@@ -77,8 +74,7 @@ public class Map {
 	public void update (float deltaTime) {
 		bob.update(deltaTime);
 		if (bob.state == Bob.DEAD) bob = new Bob(this, activeDispenser.bounds.x, activeDispenser.bounds.y);
-		cube.update(deltaTime);
-		if (cube.state == Cube.DEAD) cube = new Cube(this, bob.bounds.x, bob.bounds.y);
+
 		for (int i = 0; i < dispensers.size; i++) {
 			if (bob.bounds.overlaps(dispensers.get(i).bounds)) {
 				activeDispenser = dispensers.get(i);
