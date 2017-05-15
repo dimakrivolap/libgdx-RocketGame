@@ -12,4 +12,5 @@ public class Dispenser {
 		bounds.y = y;
 		bounds.width = bounds.height = 1;
 	}
+
 }
