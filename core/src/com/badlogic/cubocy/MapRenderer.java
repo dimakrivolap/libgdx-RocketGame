@@ -18,7 +18,7 @@ public class MapRenderer {
 	OrthographicCamera cam;
 	SpriteCache cache;
 	SpriteBatch batch = new SpriteBatch(5460);
-	ImmediateModeRenderer20 renderer = new ImmediateModeRenderer20(false, true, 0);
+	//ImmediateModeRenderer20 renderer = new ImmediateModeRenderer20(false, true, 0);
 	int[][] blocks;
 	TextureRegion tile;
 	Animation<TextureRegion> bobLeft;
@@ -28,10 +28,6 @@ public class MapRenderer {
 	Animation<TextureRegion> bobIdleLeft;
 	Animation<TextureRegion> bobIdleRight;
 	Animation<TextureRegion> bobDead;
-	Animation<TextureRegion> zap;
-	TextureRegion cube;
-	Animation<TextureRegion> cubeFixed;
-	TextureRegion cubeControlled;
 	TextureRegion dispenser;
 	Animation<TextureRegion> spawn;
 	Animation<TextureRegion> dying;
@@ -41,7 +37,6 @@ public class MapRenderer {
 	TextureRegion rocketPad;
 	TextureRegion endDoor;
 	TextureRegion movingSpikes;
-	TextureRegion laser;
 	FPSLogger fps = new FPSLogger();
 
 	public MapRenderer (Map map) {
@@ -93,10 +88,9 @@ public class MapRenderer {
 		bobIdleLeft = new Animation(0.5f, mirror[0], mirror[4]);
 		bobDead = new Animation(0.2f, split[0]);
 		split = new TextureRegion(bobTexture).split(20, 20)[1];
-		cube = split[0];
-		cubeFixed = new Animation(1, split[1], split[2], split[3], split[4], split[5]);
+
 		split = new TextureRegion(bobTexture).split(20, 20)[2];
-		cubeControlled = split[0];
+
 		spawn = new Animation(0.1f, split[4], split[3], split[2], split[1]);
 		dying = new Animation(0.1f, split[1], split[2], split[3], split[4]);
 		dispenser = split[5];
@@ -108,7 +102,7 @@ public class MapRenderer {
 		split = new TextureRegion(bobTexture).split(20, 20)[5];
 		endDoor = split[2];
 		movingSpikes = split[0];
-		laser = split[1];
+
 	}
 
 	float stateTime = 0;
@@ -213,6 +207,5 @@ public class MapRenderer {
 		cache.dispose();
 		batch.dispose();
 		tile.getTexture().dispose();
-		cube.getTexture().dispose();
 	}
 }

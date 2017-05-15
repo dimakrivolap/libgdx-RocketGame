@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class OnscreenControlRenderer {
     Map map;
     SpriteBatch batch;
-    TextureRegion dpad;
     TextureRegion left;
     TextureRegion right;
     TextureRegion jump;
@@ -26,7 +25,7 @@ public class OnscreenControlRenderer {
         left = buttons[0];
         right = buttons[1];
         jump = buttons[2];
-        dpad = new TextureRegion(texture, 0, 64, 128, 128);
+
         batch = new SpriteBatch();
         batch.getProjectionMatrix().setToOrtho2D(0, 0, 480, 320);
     }
@@ -46,7 +45,6 @@ public class OnscreenControlRenderer {
     }
 
     public void dispose() {
-        dpad.getTexture().dispose();
         batch.dispose();
     }
 }
