@@ -69,7 +69,7 @@ public class MapRenderer {
 				blocks[blockX][blockY] = cache.endCache();
 			}
 		}
-		Gdx.app.debug("Cubocy", "blocks created");
+		Gdx.app.debug("Rocket", "blocks created");
 	}
 
 	private void createAnimations () {
@@ -131,7 +131,7 @@ public class MapRenderer {
 		batch.begin();
 		renderDispensers();
 		if (map.endDoor != null) batch.draw(endDoor, map.endDoor.bounds.x, map.endDoor.bounds.y, 1, 1);
-		renderMovingSpikes();
+
 		renderBob();
 		renderRockets();
 		batch.end();
@@ -194,12 +194,6 @@ public class MapRenderer {
 		}
 	}
 
-	private void renderMovingSpikes () {
-		for (int i = 0; i < map.movingSpikes.size; i++) {
-			MovingSpikes spikes = map.movingSpikes.get(i);
-			batch.draw(movingSpikes, spikes.pos.x, spikes.pos.y, 0.5f, 0.5f, 1, 1, 1, 1, spikes.angle);
-		}
-	}
 
 
 

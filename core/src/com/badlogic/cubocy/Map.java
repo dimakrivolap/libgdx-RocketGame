@@ -20,7 +20,6 @@ public class Map {
 	Array<Dispenser> dispensers = new Array<Dispenser>();
 	Dispenser activeDispenser = null;
 	Array<Rocket> rockets = new Array<Rocket>();
-	Array<MovingSpikes> movingSpikes = new Array<MovingSpikes>();
 	public EndDoor endDoor;
 
 	public Map () {
@@ -45,8 +44,6 @@ public class Map {
 				} else if (match(pix, ROCKET)) {
 					Rocket rocket = new Rocket(this, x, pixmap.getHeight() - 1 - y);
 					rockets.add(rocket);
-				} else if (match(pix, MOVING_SPIKES)) {
-					movingSpikes.add(new MovingSpikes(this, x, pixmap.getHeight() - 1 - y));
 				}
 				  else if (match(pix, END)) {
 					endDoor = new EndDoor(x, pixmap.getHeight() - 1 - y);
@@ -56,9 +53,6 @@ public class Map {
 			}
 		}
 
-		for (int i = 0; i < movingSpikes.size; i++) {
-			movingSpikes.get(i).init();
-		}
 
 	}
 
@@ -78,10 +72,6 @@ public class Map {
 		for (int i = 0; i < rockets.size; i++) {
 			Rocket rocket = rockets.get(i);
 			rocket.update(deltaTime);
-		}
-		for (int i = 0; i < movingSpikes.size; i++) {
-			MovingSpikes spikes = movingSpikes.get(i);
-			spikes.update(deltaTime);
 		}
 
 	}
