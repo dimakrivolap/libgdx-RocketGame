@@ -22,9 +22,12 @@ public class Bob {
 	static final float DAMP = 0.90f;
 
 	Vector2 pos = new Vector2();
+	Vector2 oldpos = new Vector2();
+	float momemt;
 	Vector2 accel = new Vector2();
 	Vector2 vel = new Vector2();
 	public Rectangle bounds = new Rectangle();
+
 
 	int state = SPAWN;
 	float stateTime = 0;
@@ -46,7 +49,12 @@ public class Bob {
 
 	public void update (float deltaTime) {
 		processKeys();
+		if(stateTime-momemt>0.2f){
+			oldpos.x = pos.x;
+			oldpos.y = pos.y;
+			momemt =stateTime;
 
+		}
 		accel.y = -GRAVITY;
 		accel.scl(deltaTime);
 		vel.add(accel.x, accel.y);

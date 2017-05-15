@@ -16,7 +16,11 @@ public class Rocket {
 	Vector2 startPos = new Vector2();
 	Vector2 pos = new Vector2();
 	Vector2 vel = new Vector2();
+	Vector2 target = new Vector2();
+	Vector2 delta = new Vector2();
 	Rectangle bounds = new Rectangle();
+	float speedRotation=0.5f;
+
 
 	public Rocket (Map map, float x, float y) {
 		this.map = map;
@@ -31,10 +35,17 @@ public class Rocket {
 
 	public void update (float deltaTime) {
 		if (state == FLYING) {
-// if(pos.dst(map.bob.pos) < pos.dst(map.cube.pos)) vel.set(map.bob.pos);
-// else vel.set(map.cube.pos);
-			vel.set(map.bob.pos);
+			vel.set(map.bob.oldpos.add(delta));
+			delta.set(map.bob.pos);
+			delta.sub(map.bob.oldpos).nor();
+			delta.x/=100;
+			delta.y/=100;
+
+			vel.add(delta);
 			vel.sub(pos).nor().scl(VELOCITY);
+
+			//map.bob.oldpos.add(delta);
+
 			pos.add(vel.x * deltaTime, vel.y * deltaTime);
 			bounds.x = pos.x + 0.2f;
 			bounds.y = pos.y + 0.2f;

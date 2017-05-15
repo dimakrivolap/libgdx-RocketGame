@@ -120,7 +120,6 @@ public class MapRenderer {
 
 		cam.update();
 
-		renderLaserBeams();
 
 		cache.setProjectionMatrix(cam.combined);
 		Gdx.gl.glDisable(GL20.GL_BLEND);
@@ -138,12 +137,11 @@ public class MapRenderer {
 		batch.begin();
 		renderDispensers();
 		if (map.endDoor != null) batch.draw(endDoor, map.endDoor.bounds.x, map.endDoor.bounds.y, 1, 1);
-		renderLasers();
 		renderMovingSpikes();
 		renderBob();
 		renderRockets();
 		batch.end();
-		renderLaserBeams();
+
 
 		fps.log();
 	}
@@ -209,27 +207,7 @@ public class MapRenderer {
 		}
 	}
 
-	private void renderLasers () {
-		for (int i = 0; i < map.lasers.size; i++) {
-			Laser laser = map.lasers.get(i);
-			batch.draw(this.laser, laser.pos.x, laser.pos.y, 0.5f, 0.5f, 1, 1, 1, 1, laser.angle);
-		}
-	}
 
-	private void renderLaserBeams () {
-		cam.update(false);
-		renderer.begin(cam.combined, GL20.GL_LINES);
-		for (int i = 0; i < map.lasers.size; i++) {
-			Laser laser = map.lasers.get(i);
-			float sx = laser.startPoint.x, sy = laser.startPoint.y;
-			float ex = laser.cappedEndPoint.x, ey = laser.cappedEndPoint.y;
-			renderer.color(0, 1, 0, 1);
-			renderer.vertex(sx, sy, 0);
-			renderer.color(0, 1, 0, 1);
-			renderer.vertex(ex, ey, 0);
-		}
-		renderer.end();
-	}
 
 	public void dispose () {
 		cache.dispose();

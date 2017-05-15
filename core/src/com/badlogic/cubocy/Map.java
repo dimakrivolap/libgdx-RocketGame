@@ -14,7 +14,6 @@ public class Map {
 	static int SPIKES = 0x00ff00;
 	static int ROCKET = 0x0000ff;
 	static int MOVING_SPIKES = 0xffff00;
-	static int LASER = 0x00ffff;
 
 	int[][] tiles;
 	public Bob bob;
@@ -22,7 +21,6 @@ public class Map {
 	Dispenser activeDispenser = null;
 	Array<Rocket> rockets = new Array<Rocket>();
 	Array<MovingSpikes> movingSpikes = new Array<MovingSpikes>();
-	Array<Laser> lasers = new Array<Laser>();
 	public EndDoor endDoor;
 
 	public Map () {
@@ -49,9 +47,8 @@ public class Map {
 					rockets.add(rocket);
 				} else if (match(pix, MOVING_SPIKES)) {
 					movingSpikes.add(new MovingSpikes(this, x, pixmap.getHeight() - 1 - y));
-				} else if (match(pix, LASER)) {
-					lasers.add(new Laser(this, x, pixmap.getHeight() - 1 - y));
-				} else if (match(pix, END)) {
+				}
+				  else if (match(pix, END)) {
 					endDoor = new EndDoor(x, pixmap.getHeight() - 1 - y);
 				} else {
 					tiles[x][y] = pix;
@@ -62,9 +59,7 @@ public class Map {
 		for (int i = 0; i < movingSpikes.size; i++) {
 			movingSpikes.get(i).init();
 		}
-		for (int i = 0; i < lasers.size; i++) {
-			lasers.get(i).init();
-		}
+
 	}
 
 	boolean match (int src, int dst) {
@@ -88,9 +83,7 @@ public class Map {
 			MovingSpikes spikes = movingSpikes.get(i);
 			spikes.update(deltaTime);
 		}
-		for (int i = 0; i < lasers.size; i++) {
-			lasers.get(i).update();
-		}
+
 	}
 
 	public boolean isDeadly (int tileId) {
