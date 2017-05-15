@@ -1,5 +1,5 @@
 
-package com.badlogic.cubocy;
+package com.badlogic.rockety;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;

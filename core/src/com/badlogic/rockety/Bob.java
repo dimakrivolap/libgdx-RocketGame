@@ -1,5 +1,5 @@
 
-package com.badlogic.cubocy;
+package com.badlogic.rockety;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;

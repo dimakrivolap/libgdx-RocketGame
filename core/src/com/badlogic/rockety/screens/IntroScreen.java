@@ -1,5 +1,5 @@
 
-package com.badlogic.cubocy.screens;
+package com.badlogic.rockety.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -42,7 +42,7 @@ public class IntroScreen extends CubocScreen {
 
 	@Override
 	public void hide () {
-		Gdx.app.debug("Cubocy", "dispose intro");
+		Gdx.app.debug("RocketGame", "dispose intro");
 		batch.dispose();
 		intro.getTexture().dispose();
 	}

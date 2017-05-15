@@ -7,8 +7,8 @@ gwt {
     minHeapSize="1G"
 
     src = files(file("src/")) // Needs to be in front of "modules" below.
-    modules 'com.badlogic.cubocy.GdxDefinition'
-    devModules 'com.badlogic.cubocy.GdxDefinitionSuperdev'
+    modules 'com.badlogic.rockety.GdxDefinition'
+    devModules 'com.badlogic.rockety.GdxDefinitionSuperdev'
 
     compiler {
         strict = true;

@@ -1,5 +1,5 @@
 
-package com.badlogic.cubocy.screens;
+package com.badlogic.rockety.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;

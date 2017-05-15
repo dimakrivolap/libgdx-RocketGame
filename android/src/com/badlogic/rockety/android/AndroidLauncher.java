@@ -1,10 +1,10 @@
-package com.badlogic.cubocy.android;
+package com.badlogic.rockety.android;
 
 import android.os.Bundle;
 
+import com.badlogic.rockety.RocketGame;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.badlogic.cubocy.Cubocy;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
@@ -14,6 +14,6 @@ public class AndroidLauncher extends AndroidApplication {
 		config.useAccelerometer = false;
 		config.useCompass = false;
 		config.useWakelock = true;
-		initialize(new Cubocy(), config);
+		initialize(new RocketGame(), config);
 	}
 }

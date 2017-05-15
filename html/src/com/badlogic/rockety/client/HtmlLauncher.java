@@ -1,9 +1,9 @@
-package com.badlogic.cubocy.client;
+package com.badlogic.rockety.client;
 
+import com.badlogic.rockety.RocketGame;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.badlogic.cubocy.Cubocy;
 
 public class HtmlLauncher extends GwtApplication {
 
@@ -14,6 +14,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener createApplicationListener () {
-                return new Cubocy();
+                return new RocketGame();
         }
 }

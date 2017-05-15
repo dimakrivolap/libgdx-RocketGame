@@ -1,9 +1,9 @@
 
-package com.badlogic.cubocy.screens;
+package com.badlogic.rockety.screens;
 
-import com.badlogic.cubocy.Map;
-import com.badlogic.cubocy.MapRenderer;
-import com.badlogic.cubocy.OnscreenControlRenderer;
+import com.badlogic.rockety.Map;
+import com.badlogic.rockety.MapRenderer;
+import com.badlogic.rockety.OnscreenControlRenderer;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -45,7 +45,7 @@ public class GameScreen extends CubocScreen {
 
 	@Override
 	public void hide () {
-		Gdx.app.debug("Cubocy", "dispose game screen");
+		Gdx.app.debug("RocketGame", "dispose game screen");
 		renderer.dispose();
 		controlRenderer.dispose();
 	}
