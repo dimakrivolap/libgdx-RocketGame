@@ -13,7 +13,6 @@ public class Map {
 	static int DISPENSER = 0xff0100;
 	static int SPIKES = 0x00ff00;
 	static int ROCKET = 0x0000ff;
-	static int MOVING_SPIKES = 0xffff00;
 
 	int[][] tiles;
 	public Bob bob;

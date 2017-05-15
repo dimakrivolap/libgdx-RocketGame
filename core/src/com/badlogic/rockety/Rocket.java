@@ -44,7 +44,6 @@ public class Rocket {
 			vel.add(delta);
 			vel.sub(pos).nor().scl(VELOCITY);
 
-			//map.bob.oldpos.add(delta);
 
 			pos.add(vel.x * deltaTime, vel.y * deltaTime);
 			bounds.x = pos.x + 0.2f;
